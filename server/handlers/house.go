@@ -18,7 +18,7 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
-// var path_file = "http://localhost:5000/uploads/"
+var path_file = "http://localhost:5000/uploads/"
 
 type handlerHouse struct {
 	HouseRepository repositories.HouseRepository
@@ -38,7 +38,7 @@ func (h *handlerHouse) FindHouses(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for i, p := range houses {
-		houses[i].Image = p.Image
+		houses[i].Image =  p.Image
 	}
 
 	w.WriteHeader(http.StatusOK)
@@ -59,7 +59,7 @@ func (h *handlerHouse) GetHouse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	
+	house.Image = path_file + house.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseHouse(house)}
