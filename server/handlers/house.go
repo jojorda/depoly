@@ -18,7 +18,7 @@ import (
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
-var path_file = "http://localhost:5000/uploads/"
+// var path_file = "http://localhost:5000/uploads/"
 
 type handlerHouse struct {
 	HouseRepository repositories.HouseRepository
@@ -37,9 +37,9 @@ func (h *handlerHouse) FindHouses(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(err.Error())
 	}
 
-	for i, p := range houses {
-		houses[i].Image =  p.Image
-	}
+	// for i, p := range houses {
+	// 	houses[i].Image =  p.Image
+	// }
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: houses}
@@ -59,7 +59,7 @@ func (h *handlerHouse) GetHouse(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	house.Image = path_file + house.Image
+	// house.Image = path_file + house.Image
 
 	w.WriteHeader(http.StatusOK)
 	response := dto.SuccessResult{Code: http.StatusOK, Data: convertResponseHouse(house)}
@@ -69,8 +69,8 @@ func (h *handlerHouse) GetHouse(w http.ResponseWriter, r *http.Request) {
 func (h *handlerHouse) CreateHouse(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	// dataContex := r.Context().Value("dataFile") // add this code
-	// filename := dataContex.(string)             // add this code
+	dataContex := r.Context().Value("dataFile") // add this code
+	filepath := dataContex.(string)             // add this code
 
 	price, _ := strconv.Atoi(r.FormValue("price"))
 	bedroom, _ := strconv.Atoi(r.FormValue("bedroom"))
