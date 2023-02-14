@@ -69,8 +69,8 @@ func (h *handlerHouse) GetHouse(w http.ResponseWriter, r *http.Request) {
 func (h *handlerHouse) CreateHouse(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	dataContex := r.Context().Value("dataFile") // add this code
-	filepath := dataContex.(string)             // add this code
+// 	dataContex := r.Context().Value("dataFile") // add this code
+// 	filepath := dataContex.(string)             // add this code
 
 	price, _ := strconv.Atoi(r.FormValue("price"))
 	bedroom, _ := strconv.Atoi(r.FormValue("bedroom"))
